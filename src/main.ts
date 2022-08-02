@@ -2,7 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerConfigService } from './config/swagger/swagger.service';
-const creatTokenGooglePgoto=require('./config/creat-token-googlePhoto/index')
+
 // creatTokenGooglePgoto()
 
 require('dotenv').config();
