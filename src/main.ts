@@ -12,7 +12,7 @@ async function bootstrap() {
   const swaggerConfig = app.get<SwaggerConfigService>(SwaggerConfigService);
   logger.log(`Swagger Is Enable On Prefix /api`, 'Swagger');
   swaggerConfig.init(app);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({whitelist:true}));
   const port = process.env.PORT || 3000;
   await app.listen(port, () => {
     logger.log(`sever is running on port:${port}`);

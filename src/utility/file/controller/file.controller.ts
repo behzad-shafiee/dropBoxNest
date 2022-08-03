@@ -2,30 +2,25 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  ParseFilePipe,
   Post,
-  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiBody,
-  ApiConsumes,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { Cron } from '@nestjs/schedule';
+import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { multerOptions } from '../../../config/multer/multerOption';
-import { CreatDownlaodDto } from '../dto/creat.download.dto';
+import { DownlaodDto } from '../dto/download.dto';
+import { UplaodDto } from '../dto/upload.dto';
 import { FileService } from '../service/file.service';
-import { CreatUplaodDto } from '../dto/creat.upnload.dto';
-import { Response } from 'express';
 
 @ApiTags('imageFiles')
 @Controller('file')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 
+  @Cron('3 * * * * *',{name:'deleteImg'})
   @Post('upload')
   @UseInterceptors(
     ClassSerializerInterceptor,
@@ -67,9 +62,8 @@ export class FileController {
   })
   @ApiResponse({ status: 201, description: 'image uploaded' })
   async uploadFile(
-    @Body() creatUplaodDto: CreatUplaodDto,
-    @UploadedFile('file') file: Express.Multer.File,
-  ) {
+    @Body() creatUplaodDto: UplaodDto,
+    @UploadedFile() file: Express.Multer.File) {
     return await this.fileService.uploadFile(file, creatUplaodDto);
   }
 
@@ -78,36 +72,15 @@ export class FileController {
   @ApiResponse({
     status: 400,
     description:
-      "Bad Request : type of fileds are't suitable or field are empty",
+      "Bad Request : type of fileds are't suitable or field are empty or  your fields are empty or your infoes are incorrect",
   })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized : your token is wrong or expired',
   })
-  @ApiResponse({
-    status: 404,
-    description:
-      'Not found : your fields are empty or your infoes are incorrect',
-  })
-  @ApiResponse({ status: 201, description: 'image uploaded' })
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        access_token: {
-          type: 'string',
-        },
-        url: {
-          type: 'string',
-        },
-      },
-    },
-  })
-  @ApiConsumes('application/json')
-  async downloadFile(
-    @Body() creatDownlaodDto: CreatDownlaodDto,
-    @Res() res: Response,
-  ) {
-    return await this.fileService.downloadFile(creatDownlaodDto, res);
+  @ApiResponse({ status: 201, description: 'image download' })
+  @ApiBody({type:DownlaodDto})
+  async downloadFile(@Body() creatDownlaodDto: DownlaodDto) {
+    return await this.fileService.downloadFile(creatDownlaodDto);
   }
 }

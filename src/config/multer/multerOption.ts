@@ -5,15 +5,15 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 // Multer configuration
 export const multerConfig = {
-  dest: './upload',
+  dest: './temp',
 };
 
 // Multer upload options
 export const multerOptions = {
   // Enable file size limits
-  limits: {
-    fileSize: 100000000000,
-  },
+  // limits: {
+  //   fileSize: 100000000000,
+  // },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
     if (file.mimetype.match(/\/(jpg|jpeg|png|JPG|JPEG|PNG)$/)) {
@@ -44,7 +44,6 @@ export const multerOptions = {
     // File modification details
     filename: (req: any, file: any, cb: any) => {
         const uniqStr=Date.now();
-        const mimeType=(file.mimetype).split('/')[1]
       // Calling the callback passing the random name generated with the original extension name
       cb(null, `${uniqStr}${file.originalname}`);
     },
