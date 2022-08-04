@@ -10,8 +10,6 @@ export class AppController {
   @Get()
   renderHtmlPage(@Res() res: Response) {
     const path = join(__dirname, '../view/index.html');
-    console.log(path);
-
     return res.sendFile(path);
   }
 }

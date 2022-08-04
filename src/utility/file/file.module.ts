@@ -1,9 +1,9 @@
-import { forwardRef, Module } from '@nestjs/common';
+import {  Module } from '@nestjs/common';
 import { FileService } from './service/file.service';
 import { FileController } from './controller/file.controller';
 import { MulterModule } from '@nestjs/platform-express';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CronJobService } from './service/cronJob.service';
+// import { RedisModule } from '../redis/redis.module';
+
 
 
 @Module({
@@ -13,8 +13,9 @@ import { CronJobService } from './service/cronJob.service';
         dest: './upload',
       }),
     }),
+    // RedisModule,
   ],
-  providers: [FileService,CronJobService],
+  providers: [FileService],
   controllers: [FileController],
 })
 export class FileModule {}

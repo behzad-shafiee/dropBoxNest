@@ -1,18 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { join } from 'path';
 import { Dropbox } from 'dropbox';
 import { DownlaodDto } from '../dto/download.dto';
 import { UplaodDto } from '../dto/upload.dto';
 import { Response } from '../../../common/class/response.class';
-import { Cron, SchedulerRegistry } from '@nestjs/schedule';
-import { CronJob } from 'cron';
-import { CronJobService } from './cronJob.service';
+import { SchedulerRegistry } from '@nestjs/schedule';
+// import { RedisService } from '../../redis/redis.service';
+
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 
 @Injectable()
 export class FileService {
-  constructor(private schedulerRegistry: SchedulerRegistry) {}
+  constructor(
+    // @Inject(RedisService)
+    // private readonly redisService: RedisService,
+    private schedulerRegistry: SchedulerRegistry,
+  ) {}
 
   async deleteImg(path: string) {
     try {
@@ -51,7 +55,11 @@ export class FileService {
 
       return response;
     } catch (e) {
+      console.log(e);
       return e;
+
+      // const result = await HandlerError.errorHandler(e);
+      // await this.handlerService.handlerException400('FA', result);
     }
   }
 
@@ -91,9 +99,8 @@ export class FileService {
           return response;
         }
       }
-      const result = await fs.writeFileSync(pathFile, data.result.fileBinary);
-      console.log(result);
 
+      await fs.writeFileSync(pathFile, data.result.fileBinary);
       const response = new Response(
         hadshedPath,
         {
@@ -103,10 +110,21 @@ export class FileService {
         },
         null,
       );
+      //  await this.redisService.setKey(hadshedPath,'downloadedUrlImg', 600000);
       return response;
-    } catch (error) {
-      console.log(error);
-      return error;
+    } catch (e) {
+      // const result = await HandlerError.errorHandler(e);
+      // await this.handlerService.handlerException400('FA', result);
     }
   }
+
+  // async getUrlImg(key: string): Promise<string> {
+  //   try {
+  //     const url: any = await this.redisService.getKey(key);
+  //     return url;
+  //   } catch (e) {
+  //     const result = await HandlerError.errorHandler(e);
+  //     await this.handlerService.handlerException400('FA', result);
+  //   }
+  // }
 }

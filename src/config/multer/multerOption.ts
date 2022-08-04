@@ -16,10 +16,10 @@ export const multerOptions = {
   // },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
-    if (file.mimetype.match(/\/(jpg|jpeg|png|JPG|JPEG|PNG)$/)) {
-      // Allow storage of file
-      cb(null, true);
-    } else {
+    // if (file.mimetype.match(/\/(jpg|jpeg|png|JPG|JPEG|PNG)$/)) {
+    //   // Allow storage of file
+    //   cb(null, true);
+    // } else {
       // Reject file
       cb(
         new HttpException(
@@ -28,7 +28,7 @@ export const multerOptions = {
         ),
         false,
       );
-    }
+    // }
   },
   // Storage properties
   storage: diskStorage({

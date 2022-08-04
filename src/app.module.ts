@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ScheduleModule } from '@nestjs/schedule';
+// import { RedisModule } from './utility/redis/redis.module';
 
 require('dotenv').config;
 
@@ -18,7 +19,7 @@ require('dotenv').config;
     }),
     SwaggerConfigModule,
     FileModule,
-
+    // RedisModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
