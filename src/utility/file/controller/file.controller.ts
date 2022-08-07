@@ -22,7 +22,7 @@ export class FileController {
     private readonly fileService: FileService,
   ) {}
 
-  @Cron('3 * * * * *', { name: 'deleteImg' })
+  // @Cron('20 * * * * *', { name: 'deleteImg' })
   @Post('upload')
   @UseInterceptors(
     ClassSerializerInterceptor,

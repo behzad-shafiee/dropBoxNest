@@ -51,7 +51,7 @@ export class FileService {
         remain,
       );
 
-      this.deleteImg(pathFile);
+      // this.deleteImg(pathFile);
 
       return response;
     } catch (e) {

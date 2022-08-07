@@ -2,7 +2,7 @@ import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import { diskStorage } from 'multer';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { TypeImageEnum } from '../../utility/file/enum/type.file.enum';
+import { TypeFileEnum } from '../../utility/file/enum/type.file.enum';
 
 // Multer configuration
 export const multerConfig = {
@@ -17,7 +17,7 @@ export const multerOptions = {
   },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
-    const imgTypes=Object.values(TypeImageEnum);
+    const imgTypes=Object.values(TypeFileEnum);
 console.log(imgTypes);
     const mimetype=file.mimetype.split('/')[1]
     console.log(mimetype);
