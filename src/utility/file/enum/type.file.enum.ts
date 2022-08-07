@@ -1,9 +1,20 @@
-export enum TypeFileEnum {
-
-  // PNG = 'PNG',
-  // JPG = 'JPG',
-  // JPEG = 'JPEG',
-  // png = 'png',
-  // jpg = 'jpg',
-  // jpeg = 'jpeg',
+export enum TypeImageEnum {
+  jpg = 'jpg',
+  jpeg = 'jpeg',
+  jfif = 'jfif',
+  pjpeg = 'pjpeg',
+  pjp = 'pjp',
+  png = 'png',
+  svg = 'svg',
+  webp = 'webp',
+  avif = 'avif',
+  JPG = 'JPG',
+  JPEG = 'JPEG',
+  JFIF = 'JFIF',
+  PJPEG = 'PJPEG',
+  PJP = 'PJP',
+  PNG = 'PNG',
+  SVG = 'SVG',
+  WEBP = 'WEBP',
+  AVIF = 'AVIF',
 }
