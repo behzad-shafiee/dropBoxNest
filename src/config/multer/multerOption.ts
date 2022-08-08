@@ -17,12 +17,9 @@ export const multerOptions = {
   },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
-    const imgTypes=Object.values(TypeFileEnum);
-console.log(imgTypes);
-    const mimetype=file.mimetype.split('/')[1]
-    console.log(mimetype);
-    
-    if (imgTypes.indexOf(mimetype)!==-1) {
+    const imgTypes = Object.values(TypeFileEnum);
+    const mimetype = file.mimetype.split('/')[1];
+    if (imgTypes.indexOf(mimetype) !== -1) {
       // Allow storage of file
       cb(null, true);
     } else {
@@ -49,7 +46,7 @@ console.log(imgTypes);
     },
     // File modification details
     filename: (req: any, file: any, cb: any) => {
-        const uniqStr=Date.now();
+      const uniqStr = Date.now();
       // Calling the callback passing the random name generated with the original extension name
       cb(null, `${uniqStr}${file.originalname}`);
     },

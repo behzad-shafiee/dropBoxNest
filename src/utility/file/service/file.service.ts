@@ -1,12 +1,19 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { join } from 'path';
 import { Dropbox } from 'dropbox';
 import { DownlaodDto } from '../dto/download.dto';
 import { UplaodDto } from '../dto/upload.dto';
 import { Response } from '../../../common/class/response.class';
 import { SchedulerRegistry } from '@nestjs/schedule';
+import { ResponseFileDto } from '../response/response.file.dto';
+import { KeyDto } from '../dto/key.dto';
+import { AnyAaaaRecord } from 'dns';
 // import { RedisService } from '../../redis/redis.service';
-
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 
@@ -26,38 +33,34 @@ export class FileService {
     }
   }
 
-  async uploadFile(file: Express.Multer.File, uplaodDto: UplaodDto) {
+  async uploadFile(uplaodDto: UplaodDto, file: Express.Multer.File) {
     try {
       if (!file) {
-        return {
-          statusCode: 400,
-          message: ['file should not be empty'],
-          error: 'Bad Request',
-        };
+        throw new BadRequestException();
       }
       const dbx = new Dropbox({ accessToken: uplaodDto.access_token });
       const fileName = file.filename;
       const pathFile = join(__dirname, `../../../../temp/${fileName}`);
       const contents = await fs.readFileSync(pathFile);
       const res = await dbx.filesUpload({ path: `/${fileName}`, contents });
-      const { result, status, ...remain } = res;
-      const response = new Response(
-        result,
-        {
-          statusCode: status,
-          succeed: true,
-          message: 'image uploaded on dropBox successfully',
-        },
+      const link: any = await dbx.sharingCreateSharedLinkWithSettings({
+        path: res.result.path_display,
+      });
+
+      const { status, ...remain } = res;
+      this.deleteImg(pathFile);
+
+      return new ResponseFileDto(
+        res.status,
+        true,
+        'image uploaded on dropBox successfully',
+        '',
+        link.result.url,
+        '',
         remain,
       );
-
-      // this.deleteImg(pathFile);
-
-      return response;
     } catch (e) {
-      console.log(e);
       return e;
-
       // const result = await HandlerError.errorHandler(e);
       // await this.handlerService.handlerException400('FA', result);
     }
@@ -85,46 +88,42 @@ export class FileService {
       const salt = await bcrypt.genSalt(8);
       const hadshedPath = await bcrypt.hash(path, salt);
 
-      for (const path of pathList) {
-        if (path === fileName) {
-          const response = new Response(
-            null,
-            {
-              statusCode: 200,
-              succeed: true,
-              message: 'image already downloaded from dropBox',
-            },
-            null,
-          );
-          return response;
-        }
-      }
-
       await fs.writeFileSync(pathFile, data.result.fileBinary);
-      const response = new Response(
+      //  await this.redisService.setKey(hadshedPath,'downloadedUrlImg', 600000);
+      const response = new ResponseFileDto(
+        201,
+        true,
+        'file downloaded successfully',
         hadshedPath,
-        {
-          statusCode: 201,
-          succeed: true,
-          message: 'image downloaded from dropBox successfully',
-        },
+        '',
+        '',
         null,
       );
-      //  await this.redisService.setKey(hadshedPath,'downloadedUrlImg', 600000);
+
       return response;
     } catch (e) {
+      return e;
       // const result = await HandlerError.errorHandler(e);
       // await this.handlerService.handlerException400('FA', result);
     }
   }
 
-  // async getUrlImg(key: string): Promise<string> {
-  //   try {
-  //     const url: any = await this.redisService.getKey(key);
-  //     return url;
-  //   } catch (e) {
-  //     const result = await HandlerError.errorHandler(e);
-  //     await this.handlerService.handlerException400('FA', result);
-  //   }
-  // }
+  async getUrlImg(keyDto: KeyDto) {
+    try {
+      const url: any = await this.redisService.getKey(keyDto);
+      const response = new ResponseFileDto(
+        HttpStatus.CREATED,
+        true,
+        '',
+        '',
+        '',
+        'url',
+        null,
+      );
+      return response;
+    } catch (e) {
+      const result = await HandlerError.errorHandler(e);
+      await this.handlerService.handlerException400('FA', result);
+    }
+  }
 }

@@ -2,6 +2,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  ParseFilePipe,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -18,11 +19,9 @@ import { FileService } from '../service/file.service';
 @ApiTags('imageFiles')
 @Controller('file')
 export class FileController {
-  constructor(
-    private readonly fileService: FileService,
-  ) {}
+  constructor(private readonly fileService: FileService) {}
 
-  // @Cron('20 * * * * *', { name: 'deleteImg' })
+  @Cron('10 * * * * *', { name: 'deleteImg' })
   @Post('upload')
   @UseInterceptors(
     ClassSerializerInterceptor,
@@ -64,12 +63,10 @@ export class FileController {
   })
   @ApiResponse({ status: 201, description: 'image uploaded' })
   async uploadFile(
-    @Body() creatUplaodDto: UplaodDto,
+    @Body() uplaodDto: UplaodDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
- 
-
-    return  await this.fileService.uploadFile(file, creatUplaodDto);
+    return await this.fileService.uploadFile(uplaodDto, file);
   }
 
   @Post('download')
@@ -89,19 +86,19 @@ export class FileController {
     return await this.fileService.downloadFile(creatDownlaodDto);
   }
 
-  // @Post('getUrlImg')
-  // @ApiResponse({ status: 200, description: 'ok' })
-  // @ApiResponse({
-  //   status: 400,
-  //   description:
-  //     "Bad Request : type of fileds are't suitable or field are empty or  your fields are empty or your infoes are incorrect",
-  // })
-  // @ApiResponse({
-  //   status: 401,
-  //   description: 'Unauthorized : your token is wrong or expired',
-  // })
-  // @ApiBody({type:KeyDto})
-  // async getUrlImg(key:string):Promise<string> {
-  //   return await this.fileService.getUrlImg(key);
-  // }
+  @Post('getUrlImg')
+  @ApiResponse({ status: 200, description: 'ok' })
+  @ApiResponse({
+    status: 400,
+    description:
+      "Bad Request : type of fileds are't suitable or field are empty or  your fields are empty or your infoes are incorrect",
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized : your token is wrong or expired',
+  })
+  @ApiBody({ type: KeyDto })
+  async getUrlImg(@Body() keyDto: KeyDto) {
+    return await this.fileService.getUrlImg(keyDto);
+  }
 }
