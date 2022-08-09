@@ -1,0 +1,59 @@
+{
+  "ipg": {
+    "IPG_NOT_EXISTS": "درگاه وجود ندارد",
+    "IPG_HAS_ERROR_GET_LINK": "درگاه با مشکل مواجه شده است",
+    "IPG_ORDER_NOT_EXISTS": "شماره فاکتور مورد نظر در سیتم وجود ندارد",
+    "WALLET_CURRENCY_OF_USER_NOT_MATCHED_IPG": "درگاه انتخابی با هیچ واحد ارزی تناسبی ندارد",
+    "IPG_ALREADY_EXISTS_IN_COUNTRY_CURRENCY": "درگاه مورد نظر به ارز کشور قبلا نسبت داده شده است"
+  },
+  "public": {
+    "UUID_NOT_MATCH": "کد UUID متناظری وجود ندارد",
+    "PHONE_NUMBER_IS_NOt_VALID": "کد موبایل صحیح نمی باشد",
+    "PHONE_NUMBER_ALREADY_EXISTS": "شماره موبایل قبلا تعریف شده است",
+    "ACCESS_IS_DENIDE": "دسترسی به قسمت مورد نظر ندارید",
+    "COLUMN_NOT_EXISTS": "ستون مورد نظر وجود ندارد"
+  },
+  "country": {
+    "COUNTRY_NOT_EXISTS": "کشور مورد نظر وجود ندارد",
+    "COUNTRY_NAME_ALREADY_EXISTS": "نام کشور قبلا تعریف شده است",
+    "COUNTRY_ISO2_ALREADY_EXISTS": "کد 2 کشور قبلا تعریف شده است",
+    "COUNTRY_ISO3_ALREADY_EXISTS": "کد 3 کشور قبلا تعریف شده است"
+  },
+  "ip": {
+    "IP_ADDRESS_ERROR": "ادرس آی پی با الگوریتم مورد نظر تطبیق ندارد"
+  },
+  "sms": {
+    "SMS_PROVIDER_CAN_NOT_RUN": "داده ارسالی سمت پروایدر سامانه پیامک اشتباه می باشد",
+    "SMS_PROVIDER_HAS_ERROR": "داده های ورودی با مشکل مواجه شده است",
+    "SMS_CODE_NOT_AVAILABLE": "کد ارسالی سامانه پیامک با خطا مواجه شده است"
+  },
+  "role": {
+    "ROLE_HAS_DEFAULT_ACTION": "نقش پیش فرض قبلا فعال شده است",
+    "ROLE_NOT_EXISTS": "نقش مورد نظر وجود ندارد"
+  },
+  "phone": {
+    "PHONE_NUMBER_DENY_COUNTRY": "شماره موبایل مربوط به این کشور نمی باشد",
+    "PHONE_NUMBER_IS_NOT_EXISTS": "شماره موبایل وجود ندارد",
+    "PHONE_NUMBER_ALREADY_EXISTS": "شماره موبایل قبلا تعریف ششده است"
+  },
+  "chain": {
+    "CHAIN_NOT_EXISTS": "بلاک چین مورد نظر وجود ندارد",
+    "ARCH_NOT_EXISTS": "معماری مورد نظر تعریف نشده است",
+    "CRYPTO_NOT_EXISTS": "رمز ارز مورد ظر وجود ندارد",
+    "EXCHANGE_NOT_EXISTS": "تبادل مورد نظر وجود ندارد",
+    "TRANSACTION_FAILED": "تراکنش مورد نظر با خطا مواجه شده است",
+    "BALANCE_IS_NOT_SUFFICIENT": "تراکنش مورد نظر موجودی قابل توجه ندارد"
+  },
+  "currency": {
+    "CURRENCY_NOT_EXISTS": "ارز فیات مورد نظر وجود ندارد",
+    "CURRENCY_NAME_ALREADY_EXISTS": "نام ارز فیات مورد نظر تکراری می باشد",
+    "CURRENCY_CODE_ALREADY_EXISTS": "کد راز فیات مورد نظر تکراری می باشد",
+    "BANK_NOT_EXISTS": "بانک مورد نظر وجود ندارد",
+    "BANK_ALREADY_EXISTS": "بانک مورد نظر قبلا تعریف شده است",
+    "BANK_ALREADY_EXISTS_IN_CURRENCY": "بانک مورد نظر در قسمت ارز های فیات تکراری می باشد"
+  },
+  "file": {
+    "TOKEN_OF_DROPBOX_WRONG": "توکن دراپ باکس وارد شده صحیح نمی باشد",
+    "LINK_OF_FILE_IS_WRONG": "لینک فایل مورد نظر صحیح نمیباشد"
+  }
+}

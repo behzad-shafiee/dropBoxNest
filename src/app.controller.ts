@@ -7,9 +7,5 @@ import { join } from 'path';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  renderHtmlPage(@Res() res: Response) {
-    const path = join(__dirname, '../view/index.html');
-    return res.sendFile(path);
-  }
+  
 }

@@ -1,0 +1,59 @@
+{
+  "ipg": {
+    "IPG_NOT_EXISTS": "Ipg not exist",
+    "IPG_HAS_ERROR_GET_LINK": "IPG can not get link",
+    "IPG_ORDER_NOT_EXISTS": "Order Ipg Charge Not Exists",
+    "WALLET_CURRENCY_OF_USER_NOT_MATCHED_IPG": "Wallet currency user not matched with ipg",
+    "IPG_ALREADY_EXISTS_IN_COUNTRY_CURRENCY": "Ipg Already Exists In Currency Of Country"
+  },
+  "public": {
+    "UUID_NOT_MATCH": "UUID not matched",
+    "PHONE_NUMBER_IS_NOt_VALID": "Phone number is not valid",
+    "PHONE_NUMBER_ALREADY_EXISTS": "Phone number already exists",
+    "ACCESS_IS_DENIDE": "Access Is Denide",
+    "COLUMN_NOT_EXISTS": "Column  Not Exists"
+  },
+  "country": {
+    "COUNTRY_NOT_EXISTS": "Country not exists",
+    "COUNTRY_NAME_ALREADY_EXISTS": "Country name already exists",
+    "COUNTRY_ISO2_ALREADY_EXISTS": "Country iso2 already exists",
+    "COUNTRY_ISO3_ALREADY_EXISTS": "Country iso3 already exists"
+  },
+  "ip": {
+    "IP_ADDRESS_ERROR": "Ip Template Address Error"
+  },
+  "sms": {
+    "SMS_PROVIDER_CAN_NOT_RUN": "Sms Provider can not run",
+    "SMS_PROVIDER_HAS_ERROR": "Sms Provider Has Error",
+    "SMS_CODE_NOT_AVAILABLE": "Sms Code Not Available"
+  },
+  "role": {
+    "ROLE_HAS_DEFAULT_ACTION": "Role Has Default Action",
+    "ROLE_NOT_EXISTS": "Role not Exists"
+  },
+  "phone": {
+    "PHONE_NUMBER_DENY_COUNTRY": "Phone number not in country",
+    "PHONE_NUMBER_IS_NOT_EXISTS": "Phone number not exists",
+    "PHONE_NUMBER_ALREADY_EXISTS": "Phone number already exists"
+  },
+  "chain": {
+    "CHAIN_NOT_EXISTS": "Block Chain Not exists",
+    "ARCH_NOT_EXISTS": "Arch Not exists",
+    "CRYPTO_NOT_EXISTS": "Crypto not exists",
+    "EXCHANGE_NOT_EXISTS": "Exchange Not Exists",
+    "TRANSACTION_FAILED": "TRANSACTION Has Error",
+    "BALANCE_IS_NOT_SUFFICIENT": "Balance is not sufficient"
+  },
+  "currency": {
+    "CURRENCY_NOT_EXISTS": "Currency Not exists",
+    "CURRENCY_NAME_ALREADY_EXISTS": "Currency Name Already Exists",
+    "CURRENCY_CODE_ALREADY_EXISTS": "Currency Code Already Exists",
+    "BANK_NOT_EXISTS": "Bank Not Exists",
+    "BANK_ALREADY_EXISTS": "bank Already Exists",
+    "BANK_ALREADY_EXISTS_IN_CURRENCY": "Bank In Currency Already Exists"
+  },
+  "file": {
+    "TOKEN_OF_DROPBOX_WRONG": "Token Of DropBox Is Wrong",
+    "LINK_OF_FILE_IS_WRONG": "Link Of File Is Wrong"
+  }
+}

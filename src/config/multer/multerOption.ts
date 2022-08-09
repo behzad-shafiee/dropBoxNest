@@ -2,6 +2,7 @@ import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import { diskStorage } from 'multer';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { TypeFileEnum } from '../../utility/file/enum/type.file.enum';
 
 // Multer configuration
 export const multerConfig = {
@@ -11,15 +12,17 @@ export const multerConfig = {
 // Multer upload options
 export const multerOptions = {
   // Enable file size limits
-  // limits: {
-  //   fileSize: 100000000000,
-  // },
+  limits: {
+    fileSize: 100000000000,
+  },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
-    // if (file.mimetype.match(/\/(jpg|jpeg|png|JPG|JPEG|PNG)$/)) {
-    //   // Allow storage of file
-    //   cb(null, true);
-    // } else {
+    const imgTypes = Object.values(TypeFileEnum);
+    const mimetype = file.mimetype.split('/')[1];
+    if (imgTypes.indexOf(mimetype) !== -1) {
+      // Allow storage of file
+      cb(null, true);
+    } else {
       // Reject file
       cb(
         new HttpException(
@@ -28,7 +31,7 @@ export const multerOptions = {
         ),
         false,
       );
-    // }
+    }
   },
   // Storage properties
   storage: diskStorage({
@@ -43,7 +46,7 @@ export const multerOptions = {
     },
     // File modification details
     filename: (req: any, file: any, cb: any) => {
-        const uniqStr=Date.now();
+      const uniqStr = Date.now();
       // Calling the callback passing the random name generated with the original extension name
       cb(null, `${uniqStr}${file.originalname}`);
     },
