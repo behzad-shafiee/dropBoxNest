@@ -3,7 +3,11 @@ import {
   CacheInterceptor,
   ClassSerializerInterceptor,
   Controller,
+<<<<<<< HEAD
   Get,
+=======
+  ParseFilePipe,
+>>>>>>> ee55e186a9d713be03ef7f7079be07230b68cee9
   Post,
   Res,
   UploadedFile,
@@ -24,6 +28,7 @@ import { Response } from 'express';
 @Controller('file')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
+<<<<<<< HEAD
 
   @Get('/page')
   renderHtmlPage(@Res() res: Response) {
@@ -38,6 +43,10 @@ export class FileController {
   }
 
 
+=======
+
+  @Cron('10 * * * * *', { name: 'deleteImg' })
+>>>>>>> ee55e186a9d713be03ef7f7079be07230b68cee9
   @Post('upload')
   @UseInterceptors(
     ClassSerializerInterceptor,
@@ -82,7 +91,10 @@ export class FileController {
     @Body() uplaodDto: UplaodDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
+<<<<<<< HEAD
     
+=======
+>>>>>>> ee55e186a9d713be03ef7f7079be07230b68cee9
     return await this.fileService.uploadFile(uplaodDto, file);
   }
 
